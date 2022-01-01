@@ -1,4 +1,10 @@
 ---
+- name: install dmenu
+  pacman:
+    name:
+      - dmenu
+  become: true
+
 - name: clone PKGBUILDS
   command:
     argv:
@@ -9,7 +15,24 @@
   become: true
   become_user: "{{ archlinux_username }}"
 
-- name: build dwm package
+- name: build st
+  command:
+    argv:
+      - /usr/bin/makepkg
+      - -cC
+    chdir: /home/{{ archlinux_username }}/src/arch-packages/st
+  become: true
+  become_user: "{{ archlinux_username }}"
+
+- name: install st
+  command:
+    argv:
+      - /usr/bin/pacman
+      - -U
+      - /home/{{ archlinux_username }}/src/dwm/st-*.tar.zst
+  become: true
+
+- name: build dwm
   command:
     argv:
       - /usr/bin/makepkg
@@ -23,5 +46,5 @@
     argv:
       - /usr/bin/pacman 
       - -U
-      - /home/{{ archlinux_username }}/src/dwm/*.tar.zst
+      - /home/{{ archlinux_username }}/src/dwm/dwm-*.tar.zst
   become: true

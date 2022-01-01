@@ -8,13 +8,16 @@
       - wheel
   become: true
 
-- name: create local bin directory
+- name: create local directories
   file:
-    name: /home/{{ archlinux_username }}/bin
+    name: /home/{{ archlinux_username }}/{{ item }}
     state: directory
     owner: "{{ archlinux_username }}"
     group: users
     mode: 0755
+  with_items:
+    - bin
+    - src
   become: true
   become_user: "{{ archlinux_username }}"
 

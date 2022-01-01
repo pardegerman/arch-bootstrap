@@ -20,5 +20,5 @@
 - name: configure greeter
   copy: src=lightdm/{{ item.src }} dest=/etc/lightdm/{{ item.dest }}
   with_items:
-    - { src: 'lightdm-mini-greeter.conf' dest: '.' }
-    - { src: 'lightdm-conf.d/20-greeter.conf' dest: 'lightdm.conf.d/' }
+    - { src: 'lightdm-mini-greeter.conf', dest: '.' }
+    - { src: 'lightdm.conf.d/20-greeter.conf', dest: 'lightdm.conf.d/' }
