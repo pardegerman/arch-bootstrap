@@ -8,7 +8,7 @@
       - wheel
   become: true
 
-- name: create scripts directory
+- name: create local bin directory
   file:
     name: /home/{{ archlinux_username }}/bin
     state: directory
@@ -28,20 +28,6 @@
   with_items:
     - bashrc
     - bash_profile
-    - xinitrc
-    - direnvrc
-  become: true
-  become_user: "{{ archlinux_username }}"
-
-- name: template dotfiles
-  template:
-    src: "{{ item }}"
-    dest: /home/{{ archlinux_username }}/.{{ item }}
-    owner: "{{ archlinux_username }}"
-    group: users
-    mode: 0600
-  with_items:
-    - Xresources
   become: true
   become_user: "{{ archlinux_username }}"
 
@@ -61,13 +47,5 @@
     owner: "{{ archlinux_username }}"
     group: users
     mode: 0644
-  become: true
-  become_user: "{{ archlinux_username }}"
-
-- name: install shell colorschemes
-  git:
-    repo: "https://github.com/dharmab/base16-shell.git"
-    dest: /home/{{ archlinux_username }}/.config/base16-shell
-    version: master
   become: true
   become_user: "{{ archlinux_username }}"
