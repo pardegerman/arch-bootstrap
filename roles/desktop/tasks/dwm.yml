@@ -27,9 +27,10 @@
 - name: install st
   command:
     argv:
-      - /usr/bin/pacman
-      - -U
-      - /home/{{ archlinux_username }}/src/dwm/st-*.tar.zst
+      - '/usr/bin/pacman'
+      - '-U'
+      - '*.pkg.tar.zst'
+    chdir: /home/{{ archlinux_username }}/src/arch-packages/st
   become: true
 
 - name: build dwm
@@ -44,7 +45,8 @@
 - name: install dwm
   command: 
     argv:
-      - /usr/bin/pacman 
-      - -U
-      - /home/{{ archlinux_username }}/src/dwm/dwm-*.tar.zst
+      - '/usr/bin/pacman' 
+      - '-U'
+      - '*.pkg.tar.zst'
+    chdir: /home/{{ archlinux_username }}/src/arch-packages/dwm
   become: true
