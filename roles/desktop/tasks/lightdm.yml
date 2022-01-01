@@ -11,15 +11,14 @@
     user: "{{ archlinux_username }}"
 
 - name: configure lightdm
-  copy: src=lightdm/lightdm.conf dest=/etc/lightdm/
-  copy: src=lightdm/lighdm.conf.d/{{ item }} dest=/etc/lightdm/lightdm.conf.d/
-    - 60-xdmcp.conf
-    - 70-vnc.conf
+  copy: src=lightdm/{{ item.src }} dest=/etc/lightdm/{{ item.dest }}
+  with_items:
+    - { src: 'lightdm.conf', dest: '.' }
+    - { src: 'lightdm.conf.d/60-xdmcp.conf', dest: 'lightdm.conf.d/' }
+    - { src: 'lightdm.conf.d/70-vnc.conf', dest: 'lightdm.conf.d/' }
 
 - name: configure greeter
-  copy: 
-    src: lightdm/lightdm-mini-greeter.conf 
-    dest: /etc/lightdm/
-  copy:
-    src: lightdm/lightdm-conf.d/20-greeter.conf
-    dest: /etc/lightdm/lightdm.conf.d/
+  copy: src=lightdm/{{ item.src }} dest=/etc/lightdm/{{ item.dest }}
+  with_items:
+    - { src: 'lightdm-mini-greeter.conf' dest: '.' }
+    - { src: 'lightdm-conf.d/20-greeter.conf' dest: 'lightdm.conf.d/' }
