@@ -14,7 +14,7 @@
       - https://github.com/pardegerman/arch-packages.git
     chdir: /home/{{ archlinux_username }}/src
     become: true
-    become_user: {{ archlinux_username }}
+    become_user: "{{ archlinux_username }}"
 
 - name: build dwm package
   command:
@@ -23,7 +23,7 @@
       - -cC
     chdir: /home/{{ archlinux_username }}/src/arch-packages/dwm
     become: true
-    become_user: {{ archlinux_username }}
+    become_user: "{{ archlinux_username }}"
 
 - name: install dwm
   command: 
@@ -31,3 +31,4 @@
       - /usr/bin/pacman 
       - -U
       - /home/{{ archlinux_username }}/src/dwm/*.tar.zst
+    become: true
