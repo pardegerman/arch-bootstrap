@@ -2,7 +2,7 @@
 - name: install x
   pacman:
     name:
-      - xorg-xserver
+      - xorg-server
       - xorg-xinit
       - xorg-xsetroot
   become: true

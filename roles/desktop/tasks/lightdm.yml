@@ -3,8 +3,12 @@
   pacman:
     name:
       - lightdm
-      - lightdm-mini-greeter
-    become: true
+  become: true
+
+- name: install greeter
+  aur: 
+    name: lightdm-mini-greeter
+    user: "{{ archlinux_user }}"
 
 - name: configure lightdm
   copy: src=lightdm/{{ item }} dest=/etc/lightdm/
