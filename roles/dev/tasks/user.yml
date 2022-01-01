@@ -1,0 +1,12 @@
+---
+- name: copy dotfiles
+  copy:
+    src: "{{ item }}"
+    dest: /home/{{ archlinux_username }}/.{{ item }}
+    owner: "{{ archlinux_username }}"
+    group: users
+    mode: 0600
+  with_items:
+    - direnvrc
+  become: true
+  become_user: "{{ archlinux_username }}"

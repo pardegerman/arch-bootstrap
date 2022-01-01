@@ -1,0 +1,9 @@
+---
+- import_tasks: x.yml
+- import_tasks: gpu.yml
+- import_tasks: audio.yml
+- import_tasks: lightdm.yml
+- import_tasks: dwm.yml
+- import_tasks: wallpaper.yml
+- import_tasks: kitty.yml
+- import_tasks: applications.yml

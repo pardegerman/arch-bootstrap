@@ -1,0 +1,7 @@
+---
+- name: restart openssh server
+  systemd:
+    name: sshd
+    state: restarted
+  when: archlinux_enable_openssh_server
+  become: true

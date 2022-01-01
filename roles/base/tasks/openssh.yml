@@ -1,0 +1,35 @@
+---
+- name: configure openssh server
+  copy:
+    src: openssh/sshd_config
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: 0644
+    validate: sshd -t -f %s
+  become: true
+  notify:
+    - restart openssh server
+
+- name: disable weak openssh moduli
+  script:
+    cmd: openssh/disable_weak_moduli.sh
+  become: true
+  notify:
+    - restart openssh server
+
+- name: enable openssh server
+  systemd:
+    name: sshd
+    state: started
+    enabled: true
+  when: archlinux_enable_openssh_server
+  become: true
+
+- name: disable openssh server
+  systemd:
+    name: sshd
+    state: stopped
+    enabled: false
+  when: not archlinux_enable_openssh_server
+  become: true

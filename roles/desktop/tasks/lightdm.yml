@@ -1,0 +1,20 @@
+---
+- name: install lightdm
+  pacman:
+    name:
+      - lightdm
+      - lightdm-mini-greeter
+    become: true
+
+- name: configure lightdm
+  copy: src=lightdm/{{ item }} dest=/etc/lightdm/
+  with_items:
+    - lightdm.conf
+    - lightdm.conf.d/60-xdmcp.conf
+    - lightdm.conf.d/70-vonc.conf
+
+- name: configure greeter
+  copy: src=lightdm/{{ item }} dest=/etc/lightdm/
+  with_items:
+    - lightdm-mini-greeter.conf
+    - lightdm.conf.d/20-greeter.conf

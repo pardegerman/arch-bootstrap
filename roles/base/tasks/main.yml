@@ -1,0 +1,19 @@
+---
+# Install bare necessities
+- import_tasks: pacman.yml
+- import_tasks: firmware.yml
+- import_tasks: filesystem.yml
+- import_tasks: network.yml
+- import_tasks: utilities.yml
+# Secure the system
+- import_tasks: iptables.yml
+- import_tasks: openssh.yml
+- import_tasks: cpu.yml
+# Set the clock
+- import_tasks: time.yml
+# Configure a user
+- import_tasks: user.yml
+- import_tasks: manpages.yml
+- import_tasks: git.yml
+# Install a good text editor
+- import_tasks: vim.yml

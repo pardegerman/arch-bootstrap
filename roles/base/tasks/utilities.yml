@@ -1,0 +1,28 @@
+---
+- name: install utilities
+  pacman:
+    name:
+      - aria2
+      - bcc-tools
+      - bind-tools
+      - curl
+      - gvfs
+      - htop
+      - httpie
+      - iotop
+      - iw
+      - jq
+      - less
+      - nmap
+      - openssh
+      - python-bcc
+      - ripgrep
+      - rsync
+      - shellcheck
+      - strace
+      - sysstat
+      - udisks2
+      - unzip
+      - usbutils
+      - which
+  become: true
