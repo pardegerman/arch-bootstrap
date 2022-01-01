@@ -6,12 +6,9 @@
 
 - name: install pacman tools
   pacman:
-    name: pacman-contrib
-  become: true
-
-- name: install reflector
-  pacman:
-    name: reflector
+    name: 
+      - pacman-contrib
+      - reflector
   become: true
 
 - name: update pacman mirrorlist
@@ -20,7 +17,9 @@
 
 - name: install base metapackage
   pacman:
-    name: base
+    name:
+      - base
+      - base-devel
   become: true
 
 - name: perform full upgrade

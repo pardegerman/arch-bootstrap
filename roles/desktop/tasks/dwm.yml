@@ -1,11 +1,4 @@
 ---
-- name: install prerequisites for building packages
-  pacman:
-    name:
-      - base-devel
-      - git
-    become: true
-
 - name: clone PKGBUILDS
   command:
     argv:

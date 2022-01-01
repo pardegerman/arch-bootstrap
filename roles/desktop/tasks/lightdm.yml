@@ -8,14 +8,14 @@
 - name: install greeter
   aur: 
     name: lightdm-mini-greeter
-    user: "{{ archlinux_user }}"
+    user: "{{ archlinux_username }}"
 
 - name: configure lightdm
   copy: src=lightdm/{{ item }} dest=/etc/lightdm/
   with_items:
     - lightdm.conf
     - lightdm.conf.d/60-xdmcp.conf
-    - lightdm.conf.d/70-vonc.conf
+    - lightdm.conf.d/70-vnc.conf
 
 - name: configure greeter
   copy: src=lightdm/{{ item }} dest=/etc/lightdm/
