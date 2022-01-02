@@ -26,4 +26,4 @@
 - name: enable lightdm
   systemd:
     name: lightdm
-    state: enabled
+    enabled: yes
