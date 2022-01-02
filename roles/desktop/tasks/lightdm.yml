@@ -14,11 +14,11 @@
   copy: src=lightdm/{{ item.src }} dest=/etc/lightdm/{{ item.dest }}
   with_items:
     - { src: 'lightdm.conf', dest: '.' }
+    - { src: 'lightdm.conf.d/20-greeter.conf', dest: 'lightdm.conf.d/' }
     - { src: 'lightdm.conf.d/60-xdmcp.conf', dest: 'lightdm.conf.d/' }
     - { src: 'lightdm.conf.d/70-vnc.conf', dest: 'lightdm.conf.d/' }
 
 - name: configure greeter
-  copy: src=lightdm/{{ item.src }} dest=/etc/lightdm/{{ item.dest }}
-  with_items:
-    - { src: 'lightdm-mini-greeter.conf', dest: '.' }
-    - { src: 'lightdm.conf.d/20-greeter.conf', dest: 'lightdm.conf.d/' }
+  template:
+    src: lightdm-mini-greeter.conf
+    dest: /etc/lightdm/lightdm-mini-greeter.conf

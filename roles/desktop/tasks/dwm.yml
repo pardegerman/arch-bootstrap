@@ -44,3 +44,14 @@
     name: "{{ item }}"
   with_fileglob: /home/{{ archlinux_username }}/src/arch-packages/dwm/dwm-*.pkg.tar.zst
   become: true
+
+- name: configure {{ archlinux_username }} to use dwm
+  copy:
+    dest: /home/{{ archlinux_username }}/.dmrc
+    content: |
+      [Desktop]
+      Session=dwm
+    mode: 0644
+    owner: par
+    group: par
+
