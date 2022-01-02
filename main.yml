@@ -1,0 +1,61 @@
+---
+- name: Bootstrap Setup
+  hosts: localhost
+  connection: local
+  become: true
+  vars_files:
+    - vars/bootstrap.yml
+  roles:
+    - hostname
+    - pacman-config
+    - upgrade
+    - install-packages
+    - sudo
+    - keymap
+    - time
+    - locale
+    - ssh
+
+- name: Core System Setup
+  hosts: localhost
+  connection: local
+  become: true
+  vars_files:
+    - vars/core-system-tools.yml
+  roles:
+    - install-packages
+    - setup-users
+#    - video-drivers
+    - audio
+#    - printing
+#    - networking
+#    - security
+
+- name: Terminal Applications
+  hosts: localhost
+  connection: local
+  become: true
+  vars_files:
+    - vars/terminal-apps.yml
+  roles:
+    - install-packages
+
+# name: Desktop Environment Setup
+# hosts: localhost
+# connection: local
+# become: true
+# vars_files:
+#   - vars/desktop-apps.yml
+# roles:
+#   - xorg-install
+#   - kde-desktop-environment
+#   - install-packages
+
+# name: Install Fonts
+# hosts: localhost
+# connection: local
+# become: true
+# vars_files:
+#   - vars/fonts.yml
+# roles:
+#   - install-packages

@@ -1,0 +1,19 @@
+---
+desired_time_zone: US/Central
+
+users:
+  - name: 'par'
+    comment: 'Pär Degerman'
+    shell: '/bin/bash'
+    password: ''
+
+superusers:
+  - par
+
+default_groups:
+  - users
+
+su_groups:
+  - wheel
+  - docker
+  - ssh

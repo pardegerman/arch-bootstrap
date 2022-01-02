@@ -1,0 +1,37 @@
+---
+- name: Install ssh
+  pacman:
+    name: "openssh"
+    state: present
+
+- name: Add ssh group
+  group:
+    name: ssh
+    state: present
+
+- include_tasks: generate-host-keys.yml
+
+- name: Copy ssh_config
+  template:
+    src: etc-ssh--ssh_config.j2
+    dest: /etc/ssh/ssh_config
+    owner: root
+    group: root
+    mode: 0644
+    backup: true
+
+- name: Copy sshd_config
+  template:
+    src: etc-ssh--sshd_config.j2
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: 0644
+    backup: true
+  notify: Restart ssh
+
+- name: Start and enable the ssh service
+  service:
+    name: sshd.service
+    state: started
+    enabled: true
