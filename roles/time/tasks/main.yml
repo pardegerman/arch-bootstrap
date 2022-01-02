@@ -1,7 +1,7 @@
 ---
 - name: Set the timezone
   timezone:
-    name: '{{ desired_time_zone }}'
+    name: "{{ timezone }}"
 
 - name: Setup time sync settings
   template:

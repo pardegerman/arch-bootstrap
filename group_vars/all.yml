@@ -1,6 +1,6 @@
 ---
 timezone: 'Europe/Stockholm'
-locale: 'se_SE.UTF-8'
+locale: 'sv_SE.UTF-8'
 keymap: 'sv-latin1'
 
 users:
