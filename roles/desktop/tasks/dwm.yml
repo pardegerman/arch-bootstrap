@@ -25,12 +25,9 @@
   become_user: "{{ archlinux_username }}"
 
 - name: install st
-  command:
-    argv:
-      - '/usr/bin/pacman'
-      - '-U'
-      - '*.pkg.tar.zst'
-    chdir: /home/{{ archlinux_username }}/src/arch-packages/st
+  pacman:
+    name: "{{ item }}"
+  with_fileglob: /home/{{ archlinux_username }}/src/arch-packages/st/st-*.pkg.tar.zst
   become: true
 
 - name: build dwm
@@ -43,10 +40,7 @@
   become_user: "{{ archlinux_username }}"
 
 - name: install dwm
-  command: 
-    argv:
-      - '/usr/bin/pacman' 
-      - '-U'
-      - '*.pkg.tar.zst'
-    chdir: /home/{{ archlinux_username }}/src/arch-packages/dwm
+  pacman: 
+    name: "{{ item }}"
+  with_fileglob: /home/{{ archlinux_username }}/src/arch-packages/dwm/dwm-*.pkg.tar.zst
   become: true
