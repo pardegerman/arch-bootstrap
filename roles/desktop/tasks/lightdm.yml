@@ -22,3 +22,8 @@
   template:
     src: lightdm-mini-greeter.conf
     dest: /etc/lightdm/lightdm-mini-greeter.conf
+
+- name: enable lightdm
+  systemd:
+    name: lightdm
+    state: enabled
