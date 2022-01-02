@@ -1,9 +1,12 @@
 ---
-desired_time_zone: US/Central
+timezone: 'Europe/Stockholm'
+locale: 'se_SE.UTF-8'
+keymap: 'sv-latin1'
 
 users:
-  - name: 'par'
-    comment: 'Pär Degerman'
+  - username: 'par'
+    real_name: 'Pär Degerman'
+    email: 'par@degerman.org'
     shell: '/bin/bash'
     password: ''
 

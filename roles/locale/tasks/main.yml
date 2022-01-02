@@ -1,7 +1,7 @@
 ---
 - name: Ensure locale is present
   locale_gen:
-    name: "en_US.UTF-8"
+    name: "{{ locale }}"
     state: present
 
 - name: Install locale.conf file
