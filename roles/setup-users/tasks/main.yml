@@ -5,6 +5,14 @@
     state: present
   with_items: "{{ users }}"
 
+- name: Add additional groups
+  group:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "{{ default_groups }}"
+    - "{{ su_groups }}"
+
 - name: Create users
   user:
     name: "{{ item.name }}"

@@ -7,7 +7,7 @@ users:
     shell: '/bin/bash'
     password: ''
 
-superusers:
+super_users:
   - par
 
 default_groups:
