@@ -29,3 +29,8 @@
     - { src: 'lightdm.conf.d/60-xdmcp.conf.j2', dest: 'lightdm.conf.d/60-xdmcp.conf' }
     - { src: 'lightdm.conf.d/70-vnc.conf.j2', dest: 'lightdm.conf.d/70-vnc.conf' }
     - { src: 'lightdm-mini-greeter.conf.j2', dest: 'lightdm-mini-greeter.conf' }
+
+- name: Enable login manager
+  systemd:
+    name: lightdm
+    enabled: true
