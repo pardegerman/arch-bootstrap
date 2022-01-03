@@ -25,6 +25,7 @@
   roles:
     - install-packages
     - setup-users
+    - pkgbuilder
 #    - video-drivers
     - audio
 #    - printing

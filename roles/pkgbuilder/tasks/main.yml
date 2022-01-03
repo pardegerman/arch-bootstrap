@@ -1,0 +1,35 @@
+---
+- name: Add pkgbuilder group
+  group:
+    name: pkgbuilder
+    state: present
+
+- name: Add pkgbuilder user
+  user:
+    name: pkgbuilder
+    comment: 'User for running makepkg'
+    system: yes
+
+- name: Let pkgbuilder sudo pacman without password
+  template:
+    src: etc-sudoers.d--pkgbuilder.j2
+    dest: /etc/sudoers.d/pkgbuilder
+    owner: root
+    group: root
+    mode: 0440
+    backup: false
+
+- name: Configure makepkg to use the correct directories
+  template:
+    src: etc--makepkg.conf.j2
+    dest: /etc/makepkg.conf
+    owner: root
+    group: root
+    mode: 0644
+    backup: false
+
+- name: Install makepkg requirements
+  pacman:
+    name: 
+      - base-devel
+    state: present
