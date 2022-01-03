@@ -1,0 +1,27 @@
+---
+- name: Create temporary build directory
+  tempfile:
+    prefix: pkgbuilder
+    state: directory
+  register: tmpdir
+  become: true
+  become_user: pkgbuilder
+
+- name: Cloning {{ src_url }} into {{ tmpdir }}
+  git:
+    repo: "{{ src_url }}"
+    dest: "{{ tmpdir }}"
+  become: true
+  become_user: pkgbuilder
+
+- name: Build and install {{ src_url }}
+  command:
+    argv:
+      - /usr/bin/makepkg
+      - -scfi
+      - --needed
+      - --noconfirm
+      - --noprogressbar
+    chdir: "{{ tmpdir }}"
+  become: true
+  become_user: pkgbuilder
