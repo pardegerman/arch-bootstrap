@@ -40,3 +40,26 @@
   with_nested: 
     - "{{ super_users }}"
     - "{{ su_groups }}"
+
+- name: Populate home directory
+  file:
+    name: /home/{{ item[0].username }}/{{ item[1] }}
+    state: directory
+    owner: "{{ item[0].username }}"
+    group: "{{ item[0].username }}"
+    mode: 0755
+  with_nested:
+    - "{{ users }}"
+    - [ bin, src ]
+
+- name: Write user specific configuration
+  template:
+    src: "{{ item[1].src }}"
+    dest: /home/{{ item[0].username }}/{{ item[1].dest }}
+    owner: "{{ item[0].username }}"
+    group: "{{ item[0].username }}"
+    mode: 0644
+  with_nested:
+    - "{{ users }}"
+    - [ { src: home--bashrc.j2, dest: .bashrc },
+        { src: home--bash_profile.j2, dest: .bash_profile } ]

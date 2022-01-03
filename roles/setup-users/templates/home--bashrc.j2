@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# Set editor to vim because vi is old and nano is awful
+export EDITOR=vim
+
+# Set Java Swing UI Look and Feel to GTK, and nicer font antialiasing
+export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
+
+# Include a local bin directory
+[[ -d "$HOME/bin" ]] && export PATH="$HOME/bin:$PATH"
+
+# If not running interactively, stop here
+[[ $- != *i* ]] && return
+
+# Colored output
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+
+# mkdir creates entire directory hierarchy
+alias mkdir='mkdir -p'
+
+# Shortcut for organized detailed file list
+alias ll='ls -lah --group-directories-first --color=auto'
+
+# Shortcut to go up one directory
+alias ..='cd ..'
+
+# Shortcut to get the disk size of a directory and contents
+sizeof() {
+    if [ "$#" -ne 1 ]; then
+        echo "Usage: sizeof <directory>"
+        return
+    fi
+    du -ch "$1" | grep total
+    return 0
+}
+
+# Set prompt
+bash_prompt() {
+    # foreground colors
+    local COLOR_NONE="\\[\\033[0m\\]"
+
+    # regular colors
+    local COLOR_RED="\\[\\033[0;31m\\]"
+    local COLOR_BLUE="\\[\\033[0;34m\\]"
+    local COLOR_WHITE="\\[\\033[0;37m\\]"
+
+    # USA USA USA
+    PS1="${COLOR_RED}[${COLOR_WHITE}\\u@\\h ${COLOR_BLUE}\\W${COLOR_RED}]${COLOR_WHITE}\\\\$ ${COLOR_NONE}"
+}
+
+bash_prompt
+
