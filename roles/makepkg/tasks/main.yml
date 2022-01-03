@@ -7,10 +7,10 @@
   become: true
   become_user: pkgbuilder
 
-- name: Cloning {{ src_url }} into {{ tmpdir }}
+- name: Cloning {{ src_url }} into {{ tmpdir.path }}
   git:
     repo: "{{ src_url }}"
-    dest: "{{ tmpdir }}"
+    dest: "{{ tmpdir.path }}"
   become: true
   become_user: pkgbuilder
 
@@ -22,6 +22,6 @@
       - --needed
       - --noconfirm
       - --noprogressbar
-    chdir: "{{ tmpdir }}"
+    chdir: "{{ tmpdir.path }}"
   become: true
   become_user: pkgbuilder
