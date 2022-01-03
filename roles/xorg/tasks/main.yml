@@ -10,7 +10,7 @@
 - name: Configure xorg
   template:
     src: "{{ item.src }}"
-    dest: /etx/X11/{{ item.dest }}
+    dest: /etc/X11/{{ item.dest }}
     owner: root
     group: root
     mode: 0644
