@@ -1,0 +1,36 @@
+---
+- name: Install lightdm
+  pacman:
+    name:
+      - lightdm
+    state: present
+
+- name: Clone lightdm-mini-greeter aur package
+  git:
+    repo: https://aur.archlinux.org/lightdm-mini-greeter.git
+    dest: /home/pkgbuilder/aur
+  become: true
+  become_user: pkgbuilder
+
+- name: Build and install lightdm-mini-greeter
+  command:
+    argv:
+      - /usr/bin/makepkg
+      - -cCi
+    chdir: /home/pkgbuilder/aur/lightdm-mini-greeter
+  become: true
+  become_user: pkgbuilder
+
+- name: Configure lightdm
+  template:
+    src: "{{ item.src }}"
+    dest: /etc/lightdm/{{ item.dest }}
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - { src: 'lightdm.conf.j2', dest: 'lightdm.conf' }
+    - { src: 'lightdm.conf.d/20-greeter.conf.j2', dest: 'lightdm.conf.d/20-greeter.conf' }
+    - { src: 'lightdm.conf.d/60-xdmcp.conf.j2', dest: 'lightdm.conf.d/60-xdmcp.conf' }
+    - { src: 'lightdm.conf.d/70-vnc.conf.j2', dest: 'lightdm.conf.d/70-vnc.conf' }
+    - { src: 'lightdm-mini-greeter.conf.j2', dest: 'lightdm-mini-greeter.conf' }

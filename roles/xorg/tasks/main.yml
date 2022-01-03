@@ -1,0 +1,19 @@
+---
+- name: Install xorg
+  pacman:
+    name:
+      - xorg-server
+      - xorg-xinit
+      - arandr
+    state: present
+
+- name: Configure xorg
+  template:
+    src: "{{ item.src }}"
+    dest: /etx/X11/{{ item.dest }}
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - { src: 'xorg.conf.d/10-keyboard.conf.j2', dest: 'xorg.conf.d/10-keyboard.conf' }
+    - { src: 'xorg.conf.d/20-touchpad.conf.j2', dest: 'xorg.conf.d/20-touchpad.conf' }

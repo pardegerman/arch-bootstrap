@@ -1,0 +1,4 @@
+---
+package_set: "Desktop Applications"
+pacman_packages:
+  - feh

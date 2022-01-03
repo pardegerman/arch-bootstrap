@@ -41,16 +41,17 @@
   roles:
     - install-packages
 
-# name: Desktop Environment Setup
-# hosts: localhost
-# connection: local
-# become: true
-# vars_files:
-#   - vars/desktop-apps.yml
-# roles:
-#   - xorg-install
-#   - kde-desktop-environment
-#   - install-packages
+- name: Desktop Environment Setup
+  hosts: localhost
+  connection: local
+  become: true
+  vars_files:
+    - vars/desktop-apps.yml
+  roles:
+    - xorg
+    - lightdm
+#    - leftwm
+#    - install-packages
 
 # name: Install Fonts
 # hosts: localhost
