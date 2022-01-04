@@ -11,9 +11,14 @@
       - alacritty
       - feh
       - picom
-      - polybar
       - conky
       - dmenu
+
+- name: Install polybar
+  include_role:
+    name: makepkg
+  vars:
+    src_url: https://aur.archlinux.org/polybar.git
 
 - name: Configure users to start leftwm
   copy:

@@ -1,7 +1,7 @@
 ---
 - name: Create temporary build directory
   tempfile:
-    prefix: pkgbuilder
+    path: /home/pkgbuilder
     state: directory
   register: tmpdir
   become: true
