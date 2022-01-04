@@ -1,0 +1,27 @@
+---
+- name: Build and install leftwm
+  include_role:
+    name: makepkg
+  vars:
+    src_url: https://aur.archlinux.org/leftwm.git
+
+- name: Install dependencies
+  pacman:
+    name:
+      - alacritty
+      - feh
+      - picom
+      - polybar
+      - conky
+      - dmenu
+
+- name: Configure users to start leftwm
+  copy:
+    dest: /home/{{ item.username }}/.dmrc
+    content: |
+      [Desktop]
+      Session=leftwm
+    mode: 0644
+    owner: "{{ item.username }}"
+    group: "{{ item.username }}"
+  with_items: "{{ users }}"
