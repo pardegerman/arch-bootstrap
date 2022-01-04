@@ -50,7 +50,7 @@
   roles:
     - xorg
     - lightdm
-#    - leftwm
+    - leftwm
 #    - install-packages
 
 # name: Install Fonts
